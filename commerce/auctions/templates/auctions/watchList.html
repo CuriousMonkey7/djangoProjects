@@ -1,0 +1,43 @@
+{% extends "auctions/layout.html" %}
+
+{% block style %}
+<style>
+    .myCol {
+        border: 1px solid black;
+
+        height: 300px;
+    }
+</style>
+{% endblock style %}
+{% block body %}
+<h2>Watch List</h2>
+<div class="container-fluid h-100 d-flex flex-column">
+    <div class="row ">
+        {% for list  in listings %}
+        <div class=" col-2 pt-3 myCol" style="overflow-y: scroll;">
+
+
+            <img class="mx-auto d-block" src="{{list.items.imgUrl}}" alt="Image Not Avilable" width="130px"
+                height="150px">
+
+            <a href="{% url 'individualListing' list.items.title %}">
+                <h4>{{list.items.title}}</h4>
+            </a>
+
+            <h5>INR{{list.items.currentPrice}}</h5>
+            <ul>
+                {% for title,categoryList in categories.items %}
+
+                {% ifequal title list.items.title %}
+                {% for category in categoryList  %}
+                <li>{{category}}</li> {% endfor %}
+                {% endifequal %}
+                {% endfor %}
+            </ul>
+            <p>{{list.items.description}}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

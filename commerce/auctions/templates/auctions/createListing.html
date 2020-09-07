@@ -1,0 +1,55 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Add New Listing
+{% endblock title %}
+{% block style %}
+<style>
+    .myinput {
+        border: 1px solid black;
+    }
+
+    h2,
+    h5 {
+        color: red;
+
+    }
+</style>
+{% endblock style %}
+
+{% block body %}
+
+
+{% if not user.is_authenticated %}
+<h2>{{signInError}}</h2>
+
+{%else%}
+
+{% if errorMessage %}
+<h5>{{errorMessage}}</h5>
+{% endif %}
+<div class="container">
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        <label for="input"> Title: </label><br>
+        <input class="input" type="text" name="title" placeholder="Title"><br>
+        <label for="input">Category(Give categories separated by Comma):</label><br> <input class="input" type="text"
+            name="category" placeholder="Category/Categories"><br>
+        <label for="input">Description: </label><br> <textarea style=" resize: none; width: 700px; height: 100px;"
+            class="input" name="description" placeholder="Give Description In less than 250 letters"></textarea><br>
+
+        <label for="input">Starting Bid:</label><br> <input class="input" type="numeric" name="startingBid"
+            placeholder="Set Starting Bid"><br>
+
+        <label for="input">Url For Image:</label><br> <input class="input" type="url" name="imgUrl"
+            placeholder="Give Url For Image"><br>
+
+        <input style="margin-left: 250px;" class="input" type="submit">
+
+
+
+
+    </form>
+</div>
+{% endif %}
+{% endblock body %}
