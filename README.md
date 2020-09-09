@@ -1,2 +1,2 @@
 # djangoProjects
-All the priojects of django
+All the projects of django
